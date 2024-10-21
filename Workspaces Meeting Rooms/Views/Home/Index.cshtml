@@ -1,0 +1,14 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<main>
+    <div class="row">
+        <p>Bienvenido @Session["userEmail"]</p>
+        @using (Html.BeginForm("Logout", "Account", FormMethod.Post, new { id = "logoutForm" }))
+        {
+            @Html.AntiForgeryToken() // Esto es para proteger contra ataques CSRF
+            <button type="submit" class="btn btn-danger" onclick="return confirm('¿Seguro que desear cerrar sesión?')">Cerrar Sesión</button>
+        }
+    </div>
+</main>

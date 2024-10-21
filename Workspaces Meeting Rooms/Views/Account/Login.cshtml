@@ -1,0 +1,27 @@
+﻿@model Workspaces_Meeting_Rooms.Models.Login
+@{
+    ViewBag.Title = "Login";
+}
+
+@if(ViewBag.Title == "Login")
+{
+    Layout = "~/Views/Shared/_LoginLayout.cshtml";
+}
+
+<h2>Log-in</h2>
+@*Aqui agregar un tost puede ser en caso de que la contraseña sea incorrecta*@
+
+@using (Html.BeginForm("Login", "Account", FormMethod.Post))
+{
+    <div class="form-group">
+        @Html.LabelFor(user => user.Email)
+        @Html.TextBoxFor(user => user.Email, new { @class = "form-control" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(password => password.Password)
+        @Html.PasswordFor(password => password.Password, new { @class = "form-control" })
+    </div>
+
+    <button type="submit" class="btn btn-primary">Login</button>
+}
