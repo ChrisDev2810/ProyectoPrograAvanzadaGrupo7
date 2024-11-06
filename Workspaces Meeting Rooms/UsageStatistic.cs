@@ -16,7 +16,7 @@ namespace Workspaces_Meeting_Rooms
     {
         public int statsID { get; set; }
         public int roomID { get; set; }
-        public System.DateTime DATE { get; set; }
+        public System.DateTime date { get; set; }
         public decimal hoursBooked { get; set; }
         public decimal porcentageUsed { get; set; }
     

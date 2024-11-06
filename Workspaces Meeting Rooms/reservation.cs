@@ -17,8 +17,8 @@ namespace Workspaces_Meeting_Rooms
         public int reservationID { get; set; }
         public int roomId { get; set; }
         public int userID { get; set; }
-        public System.DateTime startTime { get; set; }
-        public System.DateTime endtime { get; set; }
+        public Nullable<System.DateTime> startTime { get; set; }
+        public Nullable<System.DateTime> endTime { get; set; }
         public int statusID { get; set; }
     
         public virtual room room { get; set; }

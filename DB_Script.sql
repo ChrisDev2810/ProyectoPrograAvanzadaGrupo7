@@ -21,7 +21,7 @@ CREATE TABLE [room] (
 )
 GO
 
-CREATE TABLE [user] (
+CREATE TABLE [users] (
   [userID] INT IDENTITY(1,1) PRIMARY KEY NOT NULL,
   [email] VARCHAR(255) NOT NULL,
   [password] VARCHAR(255),
@@ -45,7 +45,7 @@ GO
 CREATE TABLE [UsageStatistic] (
   [statsID] INT IDENTITY(1,1) PRIMARY KEY NOT NULL,
   [roomID] INT NOT NULL,
-  [DATE] DATE NOT NULL,
+  [date] DATE NOT NULL,
   [hoursBooked] DECIMAL (5,2) NOT NULL,
   [porcentageUsed] DECIMAL (5,2) NOT NULL
 )
@@ -55,8 +55,8 @@ CREATE TABLE [reservation] (
   [reservationID] INT IDENTITY(1,1) PRIMARY KEY NOT NULL,
   [roomId] INT NOT NULL,
   [userID] INT NOT NULL,
-  [startTime] DATETIME NOT NULL,
-  [endtime] DATETIME NOT NULL,
+  [startTime] DATETIME NULL,
+  [endTime] DATETIME NULL,
   [statusID] INT NOT NULL
 )
 GO
@@ -69,16 +69,16 @@ GO
 
 ----------------------CONSTRAINTS----------------------------------------
 
-ALTER TABLE roomsEquipment ADD FOREIGN KEY ([roomID]) REFERENCES [rooms] ([roomID])
+ALTER TABLE roomsEquipment ADD FOREIGN KEY ([roomID]) REFERENCES [room] ([roomID])
 GO
 
 ALTER TABLE roomsEquipment ADD FOREIGN KEY ([equipmentID]) REFERENCES [equipment] ([equipmentID])
 GO
 
-ALTER TABLE [UsageStatistic] ADD FOREIGN KEY ([roomID]) REFERENCES [rooms] ([roomID])
+ALTER TABLE [UsageStatistic] ADD FOREIGN KEY ([roomID]) REFERENCES [room] ([roomID])
 GO
 
-ALTER TABLE [reservation] ADD FOREIGN KEY ([roomID]) REFERENCES [rooms] ([roomID])
+ALTER TABLE [reservation] ADD FOREIGN KEY ([roomID]) REFERENCES [room] ([roomID])
 GO
 
 ALTER TABLE [reservation] ADD FOREIGN KEY ([userID]) REFERENCES [users] ([userID])

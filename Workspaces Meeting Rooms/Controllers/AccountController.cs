@@ -21,6 +21,7 @@ namespace Workspaces_Meeting_Rooms.Controllers
             return View();
         }
 
+
         // POST: Login
         [HttpPost]
         public ActionResult Login(Login model) //Utilice un modelo separado donde la informacion enviada desde el form se mantendra en memoria para hacer la validacion con la DB
@@ -34,6 +35,7 @@ namespace Workspaces_Meeting_Rooms.Controllers
                 //Datos almacenados en session para ser utilizados luego en la ejecucion
                 Session["userID"] = user.userID;
                 Session["userEmail"] = user.email;
+                Session["isAdmin"] = user.isAdmin;
                 FormsAuthentication.SetAuthCookie(user.email, model.RememberMe); //Se genera una cookie de autenticacion
                 return RedirectToAction("Index", "Home");
             }
