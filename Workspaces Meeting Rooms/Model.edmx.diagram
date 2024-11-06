@@ -4,20 +4,20 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="c8c00c4e21a444959b72503b5fafe41c" Name="Diagram1" ZoomLevel="74">
-        <EntityTypeShape EntityType="WMRDBModel.equipment" Width="1.5" PointX="9.25" PointY="2.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="WMRDBModel.reservation" Width="1.5" PointX="5.625" PointY="4.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="WMRDBModel.room" Width="1.5" PointX="1.875" PointY="2.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="WMRDBModel.roomsEquipment" Width="1.5" PointX="5.625" PointY="1.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="WMRDBModel.status" Width="1.5" PointX="9.25" PointY="5" IsExpanded="true" />
-        <EntityTypeShape EntityType="WMRDBModel.UsageStatistic" Width="1.5" PointX="1.75" PointY="7.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="WMRDBModel.user" Width="1.5" PointX="5.75" PointY="8.125" IsExpanded="true" />
-        <AssociationConnector Association="WMRDBModel.FK__roomsEqui__equip__06CD04F7" ManuallyRouted="false" />
-        <AssociationConnector Association="WMRDBModel.FK__reservati__roomI__08B54D69" ManuallyRouted="false" />
-        <AssociationConnector Association="WMRDBModel.FK__reservati__statu__0A9D95DB" ManuallyRouted="false" />
-        <AssociationConnector Association="WMRDBModel.FK__reservati__userI__09A971A2" ManuallyRouted="false" />
-        <AssociationConnector Association="WMRDBModel.FK__roomsEqui__roomI__05D8E0BE" ManuallyRouted="false" />
-        <AssociationConnector Association="WMRDBModel.FK__UsageStat__roomI__07C12930" ManuallyRouted="false" />
+      <Diagram DiagramId="fae4073bb8d7491a9a55397b808aa1aa" Name="Diagram1">
+        <EntityTypeShape EntityType="WMRDBModel.equipment" Width="1.5" PointX="3.75" PointY="1.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="WMRDBModel.reservation" Width="1.5" PointX="3" PointY="4.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="WMRDBModel.room" Width="1.5" PointX="0.75" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="WMRDBModel.roomsEquipment" Width="1.5" PointX="6" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="WMRDBModel.status" Width="1.5" PointX="0.75" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="WMRDBModel.UsageStatistic" Width="1.5" PointX="3" PointY="10.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="WMRDBModel.user" Width="1.5" PointX="0.75" PointY="8.625" IsExpanded="true" />
+        <AssociationConnector Association="WMRDBModel.FK__roomsEqui__equip__693CA210" ManuallyRouted="false" />
+        <AssociationConnector Association="WMRDBModel.FK__reservati__roomI__6B24EA82" ManuallyRouted="false" />
+        <AssociationConnector Association="WMRDBModel.FK__reservati__statu__6D0D32F4" ManuallyRouted="false" />
+        <AssociationConnector Association="WMRDBModel.FK__reservati__userI__6C190EBB" ManuallyRouted="false" />
+        <AssociationConnector Association="WMRDBModel.FK__roomsEqui__roomI__68487DD7" ManuallyRouted="false" />
+        <AssociationConnector Association="WMRDBModel.FK__UsageStat__roomI__6A30C649" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

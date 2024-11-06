@@ -19,8 +19,8 @@
           <Property Name="reservationID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="roomId" Type="int" Nullable="false" />
           <Property Name="userID" Type="int" Nullable="false" />
-          <Property Name="startTime" Type="datetime" Nullable="false" />
-          <Property Name="endtime" Type="datetime" Nullable="false" />
+          <Property Name="startTime" Type="datetime" />
+          <Property Name="endTime" Type="datetime" />
           <Property Name="statusID" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="room">
@@ -31,7 +31,6 @@
           <Property Name="name" Type="varchar" MaxLength="255" Nullable="false" />
           <Property Name="capacity" Type="int" Nullable="false" />
           <Property Name="location" Type="varchar" MaxLength="255" Nullable="false" />
-          <Property Name="equipmentID" Type="int" Nullable="false" />
           <Property Name="availability_start" Type="time" Precision="7" Nullable="false" />
           <Property Name="availability_end" Type="time" Precision="7" Nullable="false" />
           <Property Name="isActive" Type="bit" Nullable="false" />
@@ -57,7 +56,7 @@
           </Key>
           <Property Name="statsID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="roomID" Type="int" Nullable="false" />
-          <Property Name="DATE" Type="date" Nullable="false" />
+          <Property Name="date" Type="date" Nullable="false" />
           <Property Name="hoursBooked" Type="decimal" Precision="5" Scale="2" Nullable="false" />
           <Property Name="porcentageUsed" Type="decimal" Precision="5" Scale="2" Nullable="false" />
         </EntityType>
@@ -70,7 +69,7 @@
           <Property Name="password" Type="varchar" MaxLength="255" />
           <Property Name="isAdmin" Type="bit" Nullable="false" />
         </EntityType>
-        <Association Name="FK__reservati__roomI__08B54D69">
+        <Association Name="FK__reservati__roomI__6B24EA82">
           <End Role="room" Type="Self.room" Multiplicity="1" />
           <End Role="reservation" Type="Self.reservation" Multiplicity="*" />
           <ReferentialConstraint>
@@ -82,7 +81,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__reservati__statu__0A9D95DB">
+        <Association Name="FK__reservati__statu__6D0D32F4">
           <End Role="status" Type="Self.status" Multiplicity="1" />
           <End Role="reservation" Type="Self.reservation" Multiplicity="*" />
           <ReferentialConstraint>
@@ -94,7 +93,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__reservati__userI__09A971A2">
+        <Association Name="FK__reservati__userI__6C190EBB">
           <End Role="users" Type="Self.users" Multiplicity="1" />
           <End Role="reservation" Type="Self.reservation" Multiplicity="*" />
           <ReferentialConstraint>
@@ -106,7 +105,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__roomsEqui__equip__06CD04F7">
+        <Association Name="FK__roomsEqui__equip__693CA210">
           <End Role="equipment" Type="Self.equipment" Multiplicity="1" />
           <End Role="roomsEquipment" Type="Self.roomsEquipment" Multiplicity="*" />
           <ReferentialConstraint>
@@ -118,7 +117,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__roomsEqui__roomI__05D8E0BE">
+        <Association Name="FK__roomsEqui__roomI__68487DD7">
           <End Role="room" Type="Self.room" Multiplicity="1" />
           <End Role="roomsEquipment" Type="Self.roomsEquipment" Multiplicity="*" />
           <ReferentialConstraint>
@@ -130,7 +129,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__UsageStat__roomI__07C12930">
+        <Association Name="FK__UsageStat__roomI__6A30C649">
           <End Role="room" Type="Self.room" Multiplicity="1" />
           <End Role="UsageStatistic" Type="Self.UsageStatistic" Multiplicity="*" />
           <ReferentialConstraint>
@@ -150,27 +149,27 @@
           <EntitySet Name="status" EntityType="Self.status" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UsageStatistic" EntityType="Self.UsageStatistic" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="users" EntityType="Self.users" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK__reservati__roomI__08B54D69" Association="Self.FK__reservati__roomI__08B54D69">
+          <AssociationSet Name="FK__reservati__roomI__6B24EA82" Association="Self.FK__reservati__roomI__6B24EA82">
             <End Role="room" EntitySet="room" />
             <End Role="reservation" EntitySet="reservation" />
           </AssociationSet>
-          <AssociationSet Name="FK__reservati__statu__0A9D95DB" Association="Self.FK__reservati__statu__0A9D95DB">
+          <AssociationSet Name="FK__reservati__statu__6D0D32F4" Association="Self.FK__reservati__statu__6D0D32F4">
             <End Role="status" EntitySet="status" />
             <End Role="reservation" EntitySet="reservation" />
           </AssociationSet>
-          <AssociationSet Name="FK__reservati__userI__09A971A2" Association="Self.FK__reservati__userI__09A971A2">
+          <AssociationSet Name="FK__reservati__userI__6C190EBB" Association="Self.FK__reservati__userI__6C190EBB">
             <End Role="users" EntitySet="users" />
             <End Role="reservation" EntitySet="reservation" />
           </AssociationSet>
-          <AssociationSet Name="FK__roomsEqui__equip__06CD04F7" Association="Self.FK__roomsEqui__equip__06CD04F7">
+          <AssociationSet Name="FK__roomsEqui__equip__693CA210" Association="Self.FK__roomsEqui__equip__693CA210">
             <End Role="equipment" EntitySet="equipment" />
             <End Role="roomsEquipment" EntitySet="roomsEquipment" />
           </AssociationSet>
-          <AssociationSet Name="FK__roomsEqui__roomI__05D8E0BE" Association="Self.FK__roomsEqui__roomI__05D8E0BE">
+          <AssociationSet Name="FK__roomsEqui__roomI__68487DD7" Association="Self.FK__roomsEqui__roomI__68487DD7">
             <End Role="room" EntitySet="room" />
             <End Role="roomsEquipment" EntitySet="roomsEquipment" />
           </AssociationSet>
-          <AssociationSet Name="FK__UsageStat__roomI__07C12930" Association="Self.FK__UsageStat__roomI__07C12930">
+          <AssociationSet Name="FK__UsageStat__roomI__6A30C649" Association="Self.FK__UsageStat__roomI__6A30C649">
             <End Role="room" EntitySet="room" />
             <End Role="UsageStatistic" EntitySet="UsageStatistic" />
           </AssociationSet>
@@ -186,7 +185,7 @@
           </Key>
           <Property Name="equipmentID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="equimentDescription" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="roomsEquipments" Relationship="Self.FK__roomsEqui__equip__06CD04F7" FromRole="equipment" ToRole="roomsEquipment" />
+          <NavigationProperty Name="roomsEquipments" Relationship="Self.FK__roomsEqui__equip__693CA210" FromRole="equipment" ToRole="roomsEquipment" />
         </EntityType>
         <EntityType Name="reservation">
           <Key>
@@ -195,12 +194,12 @@
           <Property Name="reservationID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="roomId" Type="Int32" Nullable="false" />
           <Property Name="userID" Type="Int32" Nullable="false" />
-          <Property Name="startTime" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="endtime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="startTime" Type="DateTime" Precision="3" />
+          <Property Name="endTime" Type="DateTime" Precision="3" />
           <Property Name="statusID" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="room" Relationship="Self.FK__reservati__roomI__08B54D69" FromRole="reservation" ToRole="room" />
-          <NavigationProperty Name="status" Relationship="Self.FK__reservati__statu__0A9D95DB" FromRole="reservation" ToRole="status" />
-          <NavigationProperty Name="user" Relationship="Self.FK__reservati__userI__09A971A2" FromRole="reservation" ToRole="users" />
+          <NavigationProperty Name="room" Relationship="Self.FK__reservati__roomI__6B24EA82" FromRole="reservation" ToRole="room" />
+          <NavigationProperty Name="status" Relationship="Self.FK__reservati__statu__6D0D32F4" FromRole="reservation" ToRole="status" />
+          <NavigationProperty Name="user" Relationship="Self.FK__reservati__userI__6C190EBB" FromRole="reservation" ToRole="users" />
         </EntityType>
         <EntityType Name="room">
           <Key>
@@ -210,13 +209,12 @@
           <Property Name="name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="capacity" Type="Int32" Nullable="false" />
           <Property Name="location" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="equipmentID" Type="Int32" Nullable="false" />
           <Property Name="availability_start" Type="Time" Nullable="false" Precision="7" />
           <Property Name="availability_end" Type="Time" Nullable="false" Precision="7" />
           <Property Name="isActive" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="reservations" Relationship="Self.FK__reservati__roomI__08B54D69" FromRole="room" ToRole="reservation" />
-          <NavigationProperty Name="roomsEquipments" Relationship="Self.FK__roomsEqui__roomI__05D8E0BE" FromRole="room" ToRole="roomsEquipment" />
-          <NavigationProperty Name="UsageStatistics" Relationship="Self.FK__UsageStat__roomI__07C12930" FromRole="room" ToRole="UsageStatistic" />
+          <NavigationProperty Name="reservations" Relationship="Self.FK__reservati__roomI__6B24EA82" FromRole="room" ToRole="reservation" />
+          <NavigationProperty Name="roomsEquipments" Relationship="Self.FK__roomsEqui__roomI__68487DD7" FromRole="room" ToRole="roomsEquipment" />
+          <NavigationProperty Name="UsageStatistics" Relationship="Self.FK__UsageStat__roomI__6A30C649" FromRole="room" ToRole="UsageStatistic" />
         </EntityType>
         <EntityType Name="roomsEquipment">
           <Key>
@@ -225,8 +223,8 @@
           <Property Name="roomsEquipmentID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="roomID" Type="Int32" Nullable="false" />
           <Property Name="equipmentID" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="equipment" Relationship="Self.FK__roomsEqui__equip__06CD04F7" FromRole="roomsEquipment" ToRole="equipment" />
-          <NavigationProperty Name="room" Relationship="Self.FK__roomsEqui__roomI__05D8E0BE" FromRole="roomsEquipment" ToRole="room" />
+          <NavigationProperty Name="equipment" Relationship="Self.FK__roomsEqui__equip__693CA210" FromRole="roomsEquipment" ToRole="equipment" />
+          <NavigationProperty Name="room" Relationship="Self.FK__roomsEqui__roomI__68487DD7" FromRole="roomsEquipment" ToRole="room" />
         </EntityType>
         <EntityType Name="status">
           <Key>
@@ -234,7 +232,7 @@
           </Key>
           <Property Name="statusID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="statusDescription" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="reservations" Relationship="Self.FK__reservati__statu__0A9D95DB" FromRole="status" ToRole="reservation" />
+          <NavigationProperty Name="reservations" Relationship="Self.FK__reservati__statu__6D0D32F4" FromRole="status" ToRole="reservation" />
         </EntityType>
         <EntityType Name="UsageStatistic">
           <Key>
@@ -242,10 +240,10 @@
           </Key>
           <Property Name="statsID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="roomID" Type="Int32" Nullable="false" />
-          <Property Name="DATE" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="date" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="hoursBooked" Type="Decimal" Precision="5" Scale="2" Nullable="false" />
           <Property Name="porcentageUsed" Type="Decimal" Precision="5" Scale="2" Nullable="false" />
-          <NavigationProperty Name="room" Relationship="Self.FK__UsageStat__roomI__07C12930" FromRole="UsageStatistic" ToRole="room" />
+          <NavigationProperty Name="room" Relationship="Self.FK__UsageStat__roomI__6A30C649" FromRole="UsageStatistic" ToRole="room" />
         </EntityType>
         <EntityType Name="user">
           <Key>
@@ -255,9 +253,9 @@
           <Property Name="email" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="password" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="isAdmin" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="reservations" Relationship="Self.FK__reservati__userI__09A971A2" FromRole="users" ToRole="reservation" />
+          <NavigationProperty Name="reservations" Relationship="Self.FK__reservati__userI__6C190EBB" FromRole="users" ToRole="reservation" />
         </EntityType>
-        <Association Name="FK__roomsEqui__equip__06CD04F7">
+        <Association Name="FK__roomsEqui__equip__693CA210">
           <End Role="equipment" Type="Self.equipment" Multiplicity="1" />
           <End Role="roomsEquipment" Type="Self.roomsEquipment" Multiplicity="*" />
           <ReferentialConstraint>
@@ -269,7 +267,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__reservati__roomI__08B54D69">
+        <Association Name="FK__reservati__roomI__6B24EA82">
           <End Role="room" Type="Self.room" Multiplicity="1" />
           <End Role="reservation" Type="Self.reservation" Multiplicity="*" />
           <ReferentialConstraint>
@@ -281,7 +279,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__reservati__statu__0A9D95DB">
+        <Association Name="FK__reservati__statu__6D0D32F4">
           <End Role="status" Type="Self.status" Multiplicity="1" />
           <End Role="reservation" Type="Self.reservation" Multiplicity="*" />
           <ReferentialConstraint>
@@ -293,7 +291,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__reservati__userI__09A971A2">
+        <Association Name="FK__reservati__userI__6C190EBB">
           <End Role="users" Type="Self.user" Multiplicity="1" />
           <End Role="reservation" Type="Self.reservation" Multiplicity="*" />
           <ReferentialConstraint>
@@ -305,7 +303,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__roomsEqui__roomI__05D8E0BE">
+        <Association Name="FK__roomsEqui__roomI__68487DD7">
           <End Role="room" Type="Self.room" Multiplicity="1" />
           <End Role="roomsEquipment" Type="Self.roomsEquipment" Multiplicity="*" />
           <ReferentialConstraint>
@@ -317,7 +315,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__UsageStat__roomI__07C12930">
+        <Association Name="FK__UsageStat__roomI__6A30C649">
           <End Role="room" Type="Self.room" Multiplicity="1" />
           <End Role="UsageStatistic" Type="Self.UsageStatistic" Multiplicity="*" />
           <ReferentialConstraint>
@@ -337,27 +335,27 @@
           <EntitySet Name="status" EntityType="Self.status" />
           <EntitySet Name="UsageStatistics" EntityType="Self.UsageStatistic" />
           <EntitySet Name="users" EntityType="Self.user" />
-          <AssociationSet Name="FK__roomsEqui__equip__06CD04F7" Association="Self.FK__roomsEqui__equip__06CD04F7">
+          <AssociationSet Name="FK__roomsEqui__equip__693CA210" Association="Self.FK__roomsEqui__equip__693CA210">
             <End Role="equipment" EntitySet="equipments" />
             <End Role="roomsEquipment" EntitySet="roomsEquipments" />
           </AssociationSet>
-          <AssociationSet Name="FK__reservati__roomI__08B54D69" Association="Self.FK__reservati__roomI__08B54D69">
+          <AssociationSet Name="FK__reservati__roomI__6B24EA82" Association="Self.FK__reservati__roomI__6B24EA82">
             <End Role="room" EntitySet="rooms" />
             <End Role="reservation" EntitySet="reservations" />
           </AssociationSet>
-          <AssociationSet Name="FK__reservati__statu__0A9D95DB" Association="Self.FK__reservati__statu__0A9D95DB">
+          <AssociationSet Name="FK__reservati__statu__6D0D32F4" Association="Self.FK__reservati__statu__6D0D32F4">
             <End Role="status" EntitySet="status" />
             <End Role="reservation" EntitySet="reservations" />
           </AssociationSet>
-          <AssociationSet Name="FK__reservati__userI__09A971A2" Association="Self.FK__reservati__userI__09A971A2">
+          <AssociationSet Name="FK__reservati__userI__6C190EBB" Association="Self.FK__reservati__userI__6C190EBB">
             <End Role="users" EntitySet="users" />
             <End Role="reservation" EntitySet="reservations" />
           </AssociationSet>
-          <AssociationSet Name="FK__roomsEqui__roomI__05D8E0BE" Association="Self.FK__roomsEqui__roomI__05D8E0BE">
+          <AssociationSet Name="FK__roomsEqui__roomI__68487DD7" Association="Self.FK__roomsEqui__roomI__68487DD7">
             <End Role="room" EntitySet="rooms" />
             <End Role="roomsEquipment" EntitySet="roomsEquipments" />
           </AssociationSet>
-          <AssociationSet Name="FK__UsageStat__roomI__07C12930" Association="Self.FK__UsageStat__roomI__07C12930">
+          <AssociationSet Name="FK__UsageStat__roomI__6A30C649" Association="Self.FK__UsageStat__roomI__6A30C649">
             <End Role="room" EntitySet="rooms" />
             <End Role="UsageStatistic" EntitySet="UsageStatistics" />
           </AssociationSet>
@@ -383,7 +381,7 @@
                 <ScalarProperty Name="roomId" ColumnName="roomId" />
                 <ScalarProperty Name="userID" ColumnName="userID" />
                 <ScalarProperty Name="startTime" ColumnName="startTime" />
-                <ScalarProperty Name="endtime" ColumnName="endtime" />
+                <ScalarProperty Name="endTime" ColumnName="endTime" />
                 <ScalarProperty Name="statusID" ColumnName="statusID" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -395,7 +393,6 @@
                 <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="capacity" ColumnName="capacity" />
                 <ScalarProperty Name="location" ColumnName="location" />
-                <ScalarProperty Name="equipmentID" ColumnName="equipmentID" />
                 <ScalarProperty Name="availability_start" ColumnName="availability_start" />
                 <ScalarProperty Name="availability_end" ColumnName="availability_end" />
                 <ScalarProperty Name="isActive" ColumnName="isActive" />
@@ -424,7 +421,7 @@
               <MappingFragment StoreEntitySet="UsageStatistic">
                 <ScalarProperty Name="statsID" ColumnName="statsID" />
                 <ScalarProperty Name="roomID" ColumnName="roomID" />
-                <ScalarProperty Name="DATE" ColumnName="DATE" />
+                <ScalarProperty Name="date" ColumnName="date" />
                 <ScalarProperty Name="hoursBooked" ColumnName="hoursBooked" />
                 <ScalarProperty Name="porcentageUsed" ColumnName="porcentageUsed" />
               </MappingFragment>

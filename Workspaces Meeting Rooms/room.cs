@@ -26,7 +26,6 @@ namespace Workspaces_Meeting_Rooms
         public string name { get; set; }
         public int capacity { get; set; }
         public string location { get; set; }
-        public int equipmentID { get; set; }
         public System.TimeSpan availability_start { get; set; }
         public System.TimeSpan availability_end { get; set; }
         public bool isActive { get; set; }

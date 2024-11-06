@@ -1,14 +1,109 @@
-﻿@{
+﻿@model IEnumerable<Workspaces_Meeting_Rooms.room>
+@{
     ViewBag.Title = "Home Page";
 }
 
+<h1>Salas Disponibles</h1>
+
 <main>
-    <div class="row">
-        <p>Bienvenido @Session["userEmail"]</p>
-        @using (Html.BeginForm("Logout", "Account", FormMethod.Post, new { id = "logoutForm" }))
-        {
-            @Html.AntiForgeryToken() // Esto es para proteger contra ataques CSRF
-            <button type="submit" class="btn btn-danger" onclick="return confirm('¿Seguro que desear cerrar sesión?')">Cerrar Sesión</button>
-        }
+    <table class="table table-responsive">
+        <thead>
+            <tr>
+                <th>Sala</th>
+
+                <th>Capacidad</th>
+
+                <th>Ubicacion</th>
+
+                <th>Horario</th>
+
+                <th>Disponibilidad</th>
+
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var room in Model)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(roomElement => room.name)</td>
+                    <td>@Html.DisplayFor(roomElement => room.capacity)</td>
+                    <td>@Html.DisplayFor(roomElement => room.location)</td>
+                    <td>@room.availability_start.ToString(@"hh\:mm") - @room.availability_end.ToString(@"hh\:mm")</td>
+                    <td>@(room.isActive ? "Activa" : "Inactiva")</td>
+
+                    <td>
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#roomModal" data-room-id="@room.roomID" )>
+                            Ver Sala
+                        </button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    @*Dado que la ventana modal es pura interaccion con JS la data se manejo a traves de peticiones al backend 
+        por medio de JS para interactuar con esos datos hasta que esten disponibles en el DOM*@
+    <div class="modal fade" id="roomModal" tabindex="-1" aria-labelledby="roomModalLabel" aria-hidden="true">
+        <div class="modal-dialog" style="max-width: 90%; max-height: 80vh;">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="roomModalLabel">Gestione su Reserva en Esta Sala</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                <div class="container">
+                    <div class="row">
+                        <!-- Columna 1 -->
+                        <div class="col-md-4">
+                            <h5>Reservadas Realizadas</h5>
+                            <div id="displaylReservations" class="container">
+                            <!-- Contenido manejado desde modalHandler.js -->
+                            </div>
+                        </div>
+                        <!-- Columna 2 -->
+                        <div style="justify-content:center" id="displayColMain" class="col-md-4">
+                            <h2 id="roomTitleName"></h2>
+                            <!-- Contenido manejado desde modalHandler.js -->
+                        </div>
+                        <!-- Columna 3 -->
+                        <div class="col-md-3">
+                            <h5>Equipos Disponibles</h5>
+                            <div class="container">
+                                <ol id="equipmentList">
+                                    <!-- Contenido manejado desde modalHandler.js -->
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
     </div>
+
+    @if (Session["isAdmin"] != null && (bool)Session["isAdmin"])
+     {
+        <div style="margin-top:50px" class="container">
+            <div class="row d-flex justify-content-around">
+                <div class="col-auto">
+                    @Html.ActionLink("Administrar Salas", "Index", "Room", new { }, new { @class = "btn btn-primary" })
+                </div>
+                <div class="col-auto">
+                    @Html.ActionLink("Administrar Metricas de Salas", "Index", "Metrics", new { }, new { @class = "btn btn-primary" })
+                </div>                     
+                <div class="col-auto">
+                    @Html.ActionLink("Administrar Reservaciones", "Index", "Reservation", new { }, new { @class = "btn btn-primary" })
+                </div>            
+            </div>
+        </div>
+     }
 </main>
+
+@section Scripts 
+    {
+        <script src="~/Scripts/modalHandler.js"></script>
+    }
