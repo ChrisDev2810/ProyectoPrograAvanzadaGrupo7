@@ -77,7 +77,7 @@ function captureModalOnEvent() {
             if (isElementsAdded && roomId == roomId) {
                 return;
             }
-
+            //ver bien para creacion de estilos------------------------------------
             ShowReservationsArea(roomProperties.roomID, roomProperties.name, userID, 1);
 
             if (Array.isArray(roomEquipment)) {
@@ -234,6 +234,7 @@ function ShowReservationsArea(roomID, roomName, userID, statusID) {
     //Generales
     const title = document.getElementById("roomTitleName");
     title.innerText = `Sala ${roomName}`;
+    title.classList.add("test");
 
     const mainColumn = document.querySelector("#displayColMain.col-md-4");
 

@@ -1,0 +1,201 @@
+﻿/* Paleta de colores */
+:root {
+    --primary-color: #4E5861; /* Color oscuro */
+    --background-color: #FFF5D6; /* Fondo */
+    --table-bg: #B1CCC4; /* Fondo de las filas de la tabla */
+    --text-dark: #4E5861; /* Color de texto oscuro */
+    --accent-color: #F5E3AE; /* Color de acento */
+    --success-color: #A5D86E; /* Color de disponibilidad - verde */
+    --error-color: #E57D63; /* Color de no disponibilidad - rojo */
+    --button-hover: #E1E6D3; /* Color del botón en hover */
+}
+
+/* Estilos generales */
+body {
+    font-family: Arial, sans-serif;
+    background-color: var(--background-color);
+    color: var(--text-dark);
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    text-align: center;
+    color: var(--primary-color);
+    margin-top: 20px;
+}
+
+/* Tabla de Salas */
+.table-container {
+    padding: 20px;
+    background-color: var(--background-color);
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    background-color: var(--background-color);
+}
+
+th, td {
+    padding: 15px;
+    text-align: center;
+    border-bottom: 1px solid var(--accent-color);
+}
+
+th {
+    font-weight: bold;
+    color: var(--text-dark);
+    background-color: var(--background-color);
+}
+
+tr:nth-child(even) {
+    background-color: var(--table-bg);
+}
+
+/* Iconos de disponibilidad */
+.status-icon {
+    font-size: 1.5rem;
+}
+
+    .status-icon.success {
+        color: var(--success-color);
+    }
+
+    .status-icon.error {
+        color: var(--error-color);
+    }
+
+/* Botón "Ver Sala" */
+.view-room-btn {
+    background-color: var(--background-color);
+    color: var(--text-dark);
+    border: 1px solid var(--accent-color);
+    border-radius: 5px;
+    padding: 8px 12px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+    .view-room-btn:hover {
+        background-color: var(--accent-color);
+    }
+
+/* Modal */
+.modal-content {
+    background-color: var(--background-color);
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.modal-header {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 15px;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+}
+
+.modal-title {
+    font-size: 1.5rem;
+}
+
+.modal-body {
+    padding: 20px;
+}
+
+.modal-footer {
+    background-color: var(--background-color);
+}
+
+/* Contenido del modal */
+.container {
+    padding: 15px;
+}
+
+/* Columnas en el modal */
+#displayColMain, #displaylReservations, #equipmentList {
+    background-color: var(--table-bg);
+    border-radius: 5px;
+    padding: 10px;
+    margin-top: 10px;
+}
+
+#roomTitleName {
+    color: var(--primary-color);
+    font-weight: bold;
+    font-size: 1.8rem;
+    text-align: center;
+}
+
+/* Estilos de Equipos Disponibles */
+#equipmentList {
+    list-style: none;
+    padding: 3;
+    margin: 3;
+}
+
+    #equipmentList li {
+        background-color: var(--accent-color);
+        padding: 8px 12px;
+        margin-bottom: 5px;
+        border-radius: 4px;
+        font-size: 0.9rem;
+        color: var(--text-dark);
+    }
+
+/* Botones en el modal */
+.btn-primary, .btn-secondary {
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.btn-primary {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+    .btn-primary:hover {
+        background-color: var(--button-hover);
+        color: var(--text-dark);
+    }
+
+.btn-secondary {
+    background-color: var(--error-color);
+    color: white;
+}
+
+    .btn-secondary:hover {
+        background-color: darken(var(--error-color), 10%);
+    }
+
+/* Mensaje de error (toast) */
+.toast-message {
+    background-color: var(--error-color);
+    color: white;
+    padding: 100px;
+    border-radius: 5px;
+    text-align: center;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+/* Estilos de los enlaces de administración */
+.container .row .col-auto .btn-primary {
+    background-color: var(--primary-color);
+    color: white;
+    margin-top: 10px;
+    border-radius: 5px;
+    padding: 10px;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+    .container .row .col-auto .btn-primary:hover {
+        background-color: var(--button-hover);
+        color: var(--text-dark);
+    }
