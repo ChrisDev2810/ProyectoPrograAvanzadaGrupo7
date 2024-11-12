@@ -16,7 +16,7 @@ namespace Workspaces_Meeting_Rooms.Controllers
         // GET: Room
         public ActionResult Index()
         {
-            return View(connection.room.ToList());
+            return View(connection.rooms.ToList());
         }
 
         // GET: Room/Details/5
@@ -26,7 +26,7 @@ namespace Workspaces_Meeting_Rooms.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            room Rooms = connection.room.Find(id);
+            room Rooms = connection.rooms.Find(id);
             if (Rooms == null)
             {
                 return HttpNotFound();
@@ -38,7 +38,7 @@ namespace Workspaces_Meeting_Rooms.Controllers
         public ActionResult Create()
         {
             // Obtener todos los equipos y enviarlos a la vista
-            ViewBag.Equipments = connection.equipment.Select(e => new SelectListItem
+            ViewBag.Equipments = connection.equipments.Select(e => new SelectListItem
             {
                 Value = e.equipmentID.ToString(),
                 Text = e.equimentDescription
@@ -54,7 +54,7 @@ namespace Workspaces_Meeting_Rooms.Controllers
             if (ModelState.IsValid)
             {
                 // Guardar la sala
-                connection.room.Add(room);
+                connection.rooms.Add(room);
                 connection.SaveChanges();
 
                 // Guardar los equipos seleccionados para esta sala
@@ -67,7 +67,7 @@ namespace Workspaces_Meeting_Rooms.Controllers
                             roomID = room.roomID,
                             equipmentID = equipmentId
                         };
-                        connection.roomsEquipment.Add(roomEquipment);
+                        connection.roomsEquipments.Add(roomEquipment);
                     }
                     connection.SaveChanges();
                 }
@@ -76,7 +76,7 @@ namespace Workspaces_Meeting_Rooms.Controllers
             }
 
             // Si hay un error en el modelo, recargar la lista de equipos para la vista
-            ViewBag.Equipments = connection.equipment.Select(e => new SelectListItem
+            ViewBag.Equipments = connection.equipments.Select(e => new SelectListItem
             {
                 Value = e.equipmentID.ToString(),
                 Text = e.equimentDescription
@@ -92,15 +92,15 @@ namespace Workspaces_Meeting_Rooms.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            var room = connection.room.Find(id);
+            var room = connection.rooms.Find(id);
             if (room == null)
             {
                 return HttpNotFound();
             }
 
             // Obtener todos los equipos y marcar los que ya están asignados a esta sala
-            var equipments = connection.equipment.ToList();
-            var assignedEquipmentIds = connection.roomsEquipment
+            var equipments = connection.equipments.ToList();
+            var assignedEquipmentIds = connection.roomsEquipments
                 .Where(re => re.roomID == room.roomID)
                 .Select(re => re.equipmentID)
                 .ToList();
@@ -125,14 +125,14 @@ namespace Workspaces_Meeting_Rooms.Controllers
                 connection.SaveChanges();
 
                 // Actualizar los equipos asignados a esta sala
-                var existingAssignments = connection.roomsEquipment.Where(re => re.roomID == room.roomID);
-                connection.roomsEquipment.RemoveRange(existingAssignments);
+                var existingAssignments = connection.roomsEquipments.Where(re => re.roomID == room.roomID);
+                connection.roomsEquipments.RemoveRange(existingAssignments);
 
                 if (selectedEquipments != null)
                 {
                     foreach (var equipmentId in selectedEquipments)
                     {
-                        connection.roomsEquipment.Add(new roomsEquipment
+                        connection.roomsEquipments.Add(new roomsEquipment
                         {
                             roomID = room.roomID,
                             equipmentID = equipmentId
@@ -154,7 +154,7 @@ namespace Workspaces_Meeting_Rooms.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            room room = connection.room.Find(id);
+            room room = connection.rooms.Find(id);
             if (room == null)
             {
                 return HttpNotFound();
@@ -166,8 +166,8 @@ namespace Workspaces_Meeting_Rooms.Controllers
         [HttpPost, ActionName("Delete")]
         public ActionResult DeleteConfirmed(int id)
         {
-            room room = connection.room.Find(id);
-            connection.room.Remove(room);
+            room room = connection.rooms.Find(id);
+            connection.rooms.Remove(room);
             connection.SaveChanges();
             return RedirectToAction("Index");
         }

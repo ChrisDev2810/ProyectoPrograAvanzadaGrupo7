@@ -15,7 +15,7 @@ namespace Workspaces_Meeting_Rooms.Controllers
         // GET: Equipment
         public ActionResult Index()
         {
-            return View(connection.equipment.ToList());
+            return View(connection.equipments.ToList());
         }
 
         // GET: Equipment/Create
@@ -31,7 +31,7 @@ namespace Workspaces_Meeting_Rooms.Controllers
             if (ModelState.IsValid)
             {
                 // Agrega el nuevo equipo a la base de datos
-                connection.equipment.Add(Equipment);
+                connection.equipments.Add(Equipment);
                 connection.SaveChanges();
 
                 // Redirige a la lista de equipos después de crear el nuevo registro
@@ -51,7 +51,7 @@ namespace Workspaces_Meeting_Rooms.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            var Equipment = connection.equipment.Find(id);
+            var Equipment = connection.equipments.Find(id);
             if (Equipment == null)
             {
                 return HttpNotFound();
@@ -82,7 +82,7 @@ namespace Workspaces_Meeting_Rooms.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            var Equipment = connection.equipment.Find(id);
+            var Equipment = connection.equipments.Find(id);
             if (Equipment == null)
             {
                 return HttpNotFound();
@@ -95,10 +95,10 @@ namespace Workspaces_Meeting_Rooms.Controllers
         [HttpPost, ActionName("Delete")]
         public ActionResult DeleteConfirmed(int id)
         {
-            var Equipment = connection.equipment.Find(id);
+            var Equipment = connection.equipments.Find(id);
             if (Equipment != null)
             {
-                connection.equipment.Remove(Equipment);
+                connection.equipments.Remove(Equipment);
                 connection.SaveChanges();
             }
 
