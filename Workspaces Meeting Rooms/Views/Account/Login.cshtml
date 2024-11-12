@@ -8,27 +8,8 @@
     Layout = "~/Views/Shared/_LoginLayout.cshtml";
 }
 
-<div class="container">
-    <div class="left-section">
-        <img src="https://www.wework.com/ideas/wp-content/uploads/sites/4/2021/08/20201008-199WaterSt-2_v1-scaled.jpg"
-             alt="Imagen de fondo"
-             style="width: 140%; height: 100%; object-fit: cover;" />
-    </div>
-
-
-
-
-    <div class="login-container">
-        <h1>Bienvenido al sistema de reservas</h1>
-        <hr>
-        <h2>Iniciar Sesión</h2>
-
-        @if (ViewBag.LoginError != null)
-        {
-            <div class="toast-message">
-                @ViewBag.LoginError
-            </div>
-        }
+<h2>Iniciar Session</h2>
+@*Aqui agregar un tost puede ser en caso de que la contraseña sea incorrecta*@
 
         @using (Html.BeginForm("Login", "Account", FormMethod.Post))
         {
