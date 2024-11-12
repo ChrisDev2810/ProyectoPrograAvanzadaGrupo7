@@ -1,0 +1,36 @@
+﻿@model IEnumerable<Workspaces_Meeting_Rooms.equipment>
+
+@{
+    ViewBag.Title = "Lista de articulos";
+}
+
+<h2>Lista de articulos</h2>
+
+<p>
+    @Html.ActionLink("Registrar nuevo articulo", "Create", null, new { @class = "btn btn-primary" })
+</p>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Equipment ID</th>
+            <th>Descripción</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.equipmentID</td>
+                <td>@item.equimentDescription</td>
+                <td>
+                    @Html.ActionLink("Editar", "Edit", new { id = item.equipmentID }, new { @class = "btn btn-warning btn-sm" }) |
+                    @Html.ActionLink("Eliminar", "Delete", new { id = item.equipmentID }, new { @class = "btn btn-danger btn-sm" })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<br />
+@Html.ActionLink("Cancelar", "Index", "Room", null, new { @class = "btn btn-secondary" })

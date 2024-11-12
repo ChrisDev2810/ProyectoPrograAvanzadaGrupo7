@@ -1,0 +1,37 @@
+﻿@model Workspaces_Meeting_Rooms.room
+
+@{
+    ViewBag.Title = "Detalles de la Sala";
+}
+
+<h2>Detalles de la Sala</h2>
+
+<div>
+    <dl class="dl-horizontal">
+        <dt>Room ID</dt>
+        <dd>@Model.roomID</dd>
+
+        <dt>Nombre</dt>
+        <dd>@Model.name</dd>
+
+        <dt>Capacidad</dt>
+        <dd>@Model.capacity</dd>
+
+        <dt>Localización</dt>
+        <dd>@Model.location</dd>
+
+        <dt>Hora de inicio</dt>
+        <dd>@Model.availability_start.ToString("hh\\:mm")</dd>
+
+        <dt>Hora limite finalización</dt>
+        <dd>@Model.availability_end.ToString("hh\\:mm")</dd>
+
+        <dt>Estado</dt>
+        <dd>@(Model.isActive ? "Disponible" : "Ocupado")</dd>
+    </dl>
+
+    <div>
+        @Html.ActionLink("Vista de editar", "Edit", new { id = Model.roomID }, new { @class = "btn btn-primary" }) |
+        @Html.ActionLink("Volver", "Index", null, new { @class = "btn btn-secondary" })
+    </div>
+</div>
