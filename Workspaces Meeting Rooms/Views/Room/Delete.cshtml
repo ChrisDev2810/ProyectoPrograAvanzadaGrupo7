@@ -1,0 +1,49 @@
+﻿@model Workspaces_Meeting_Rooms.room
+
+@{
+    ViewBag.Title = "Delete Room";
+}
+
+<h2>Eliminar Sala</h2>
+
+<div>
+    <h4>Room Details</h4>
+    <dl class="dl-horizontal">
+        <dt>Room ID</dt>
+        <dd>@Model.roomID</dd>
+
+        <dt>Nombre</dt>
+        <dd>@Model.name</dd>
+
+        <dt>Capacidad</dt>
+        <dd>@Model.capacity</dd>
+
+        <dt>Localización</dt>
+        <dd>@Model.location</dd>
+
+        <dt>Hora de inicio</dt>
+        <dd>@Model.availability_start.ToString("hh\\:mm")</dd>
+
+        <dt>Hora limite finalización</dt>
+        <dd>@Model.availability_end.ToString("hh\\:mm")</dd>
+
+        <dt>Estado</dt>
+        <dd>@(Model.isActive ? "Disponible" : "Ocupado")</dd>
+    </dl>
+
+    @using (Html.BeginForm("Delete", "Room", FormMethod.Post, new { onsubmit = "return confirmDelete();" }))
+    {
+        @Html.HiddenFor(model => model.roomID)
+
+        <button type="submit" class="btn btn-danger">Eliminar</button>
+        @Html.ActionLink("Cancel", "Index", null, new { @class = "btn btn-secondary" })
+    }
+</div>
+
+@section Scripts {
+    <script type="text/javascript">
+        function confirmDelete() {
+            return confirm("¿Estás seguro de que deseas eliminar esta sala?");
+        }
+    </script>
+}
