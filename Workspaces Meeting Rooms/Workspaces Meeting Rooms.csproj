@@ -193,6 +193,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\bootstrap.rtl.css" />
     <Content Include="Content\bootstrap.rtl.min.css" />
+    <Content Include="CSS\loginStyles.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
@@ -219,6 +220,7 @@
     <Content Include="Model.edmx.diagram">
       <DependentUpon>Model.edmx</DependentUpon>
     </Content>
+    <Content Include="CSS\styles.css" />
     <None Include="Scripts\jquery-3.7.0.intellisense.js" />
     <Content Include="Scripts\modalHandler.js" />
     <Content Include="Scripts\jquery-3.7.0.js" />

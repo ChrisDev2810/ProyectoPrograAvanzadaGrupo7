@@ -3,25 +3,47 @@
     ViewBag.Title = "Login";
 }
 
-@if(ViewBag.Title == "Login")
+@if (ViewBag.Title == "Login")
 {
     Layout = "~/Views/Shared/_LoginLayout.cshtml";
 }
 
-<h2>Iniciar Session</h2>
-@*Aqui agregar un tost puede ser en caso de que la contraseña sea incorrecta*@
+<div class="container" style="display: flex; height: 100vh; width: 100vw; margin: 0; padding: 0;">
 
-@using (Html.BeginForm("Login", "Account", FormMethod.Post))
-{
-    <div class="form-group">
-        @Html.LabelFor(user => user.Email)
-        @Html.TextBoxFor(user => user.Email, new { @class = "form-control" })
+    <!-- Imagen a la izquierda -->
+    <div style="flex: 3; height: 100vh;">
+        <img src="https://www.wework.com/ideas/wp-content/uploads/sites/4/2021/08/20201008-199WaterSt-2_v1-scaled.jpg"
+             alt="Imagen de fondo"
+             style="width: 100%; height: 100%; object-fit: cover;" />
     </div>
 
-    <div class="form-group">
-        @Html.LabelFor(password => password.Password)
-        @Html.PasswordFor(password => password.Password, new { @class = "form-control" })
-    </div>
+    <!-- Franja verde a la derecha ocupando el 25% -->
+    <div class="login-container">
 
-    <button type="submit" class="btn btn-primary">Login</button>
-}
+        <h1>Bienvenido al sistema de reservas</h1>
+        <hr>
+        <h2>Iniciar Sesión</h2>
+
+        @if (ViewBag.LoginError != null)
+        {
+            <div class="toast-message">
+                @ViewBag.LoginError
+            </div>
+        }
+
+        @using (Html.BeginForm("Login", "Account", FormMethod.Post))
+        {
+            <div class="form-group">
+                @Html.LabelFor(user => user.Email)
+                @Html.TextBoxFor(user => user.Email, new { @class = "form-control" })
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(password => password.Password)
+                @Html.PasswordFor(password => password.Password, new { @class = "form-control" })
+            </div>
+
+            <button type="submit" class="btn btn-primary">Login</button>
+        }
+    </div>
+</div>

@@ -1,0 +1,106 @@
+﻿/* Paleta de colores */
+:root {
+    --primary-color: #4E5861; /* Color oscuro */
+    --background-color: #FFF5D6; /* Fondo claro */
+    --table-bg: #B1CCC4; /* Fondo suave */
+    --text-dark: #4E5861; /* Color de texto oscuro */
+    --accent-color: #F5E3AE; /* Color de acento */
+    --success-color: #A5D86E; /* Color de disponibilidad - verde */
+    --error-color: #E57D63; /* Color de no disponibilidad - rojo */
+    --button-hover: #E1E6D3; /* Color del botón en hover */
+}
+
+/* Fondo general */
+body, html {
+    height: 100%;
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: var(--background-color);
+    display: flex;
+}
+
+/* Contenedor del login */
+.login-container {
+    background-color: var(--table-bg);
+    padding: 20px;
+    border-radius: 0px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+    width: 600px;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    right: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+    /* Título principal */
+    .login-container h1 {
+        color: var(--primary-color);
+        font-size: 2.5rem;
+        margin-bottom: 20px;
+        text-align: center;
+    }
+
+    /* Título de sección */
+    .login-container h2 {
+        color: var(--text-dark);
+        font-size: 3.5rem;
+        margin-bottom: 10px;
+    }
+
+    /* Estilos de los labels */
+    .login-container .form-group label {
+        color: var(--text-dark);
+        font-weight: bold;
+        display: block;
+        margin-bottom: 5px;
+        text-align: left;
+    }
+
+    /* Estilos de los inputs */
+    .login-container .form-group .form-control {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 15px;
+        border: 1px solid var(--accent-color);
+        border-radius: 5px;
+        background-color: var(--button-hover);
+        font-size: 1rem;
+        color: var(--text-dark);
+        text-align: left;
+    }
+
+    /* Estilos del botón */
+    .login-container .btn-primary {
+        background-color: var(--primary-color);
+        color: white;
+        border: none;
+        padding: 10px;
+        border-radius: 5px;
+        cursor: pointer;
+        width: 100%;
+        font-size: 1rem;
+        font-weight: bold;
+        transition: background-color 0.3s;
+        margin-top: 10px;
+    }
+
+        .login-container .btn-primary:hover {
+            background-color: var(--button-hover);
+            color: var(--text-dark);
+        }
+
+/* Mensaje de error (toast) */
+.toast-message {
+    background-color: var(--error-color);
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    text-align: center;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
