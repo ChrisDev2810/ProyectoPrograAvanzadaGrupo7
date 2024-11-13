@@ -1,0 +1,50 @@
+﻿@model IEnumerable<Workspaces_Meeting_Rooms.room>
+
+@{
+    ViewBag.Title = "Room Index";
+}
+
+<h2>Lista de Salas</h2>
+
+<p>
+    @Html.ActionLink("Crear una nueva sala", "Create")
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Room ID</th>
+            <th>Nombre</th>
+            <th>Capacidad</th>
+            <th>Localización</th>
+            <th>Hora de inicio</th>
+            <th>Hora limite finalización</th>
+            <th>Estado</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var room in Model)
+        {
+            <tr>
+                <td>@room.roomID</td>
+                <td>@room.name</td>
+                <td>@room.capacity</td>
+                <td>@room.location</td>
+                <td>@room.availability_start</td>
+                <td>@room.availability_end</td>
+                <td>@(room.isActive == true ? "Disponible" : (room.isActive == false ? "Ocupado" : "Estado desconocido"))</td>
+
+                <td>
+                    @Html.ActionLink("Detalles", "Details", new { id = room.roomID }) |
+                    @Html.ActionLink("Editar", "Edit", new { id = room.roomID }) |
+                    @Html.ActionLink("Eliminar", "Delete", new { id = room.roomID })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<div class="col-auto">
+    @Html.ActionLink("Inventario de equipo", "Index", "Equipment", new { }, new { @class = "btn btn-primary" })
+    @Html.ActionLink("Volver al Home", "Index", "Home", new { }, new { @class = "btn btn-primary" })
+</div>

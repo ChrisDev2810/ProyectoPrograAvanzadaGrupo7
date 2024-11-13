@@ -1,0 +1,26 @@
+﻿@model Workspaces_Meeting_Rooms.equipment
+
+@{
+    ViewBag.Title = "Editar Equipo";
+}
+
+<h2>Editar Equipo</h2>
+
+@using (Html.BeginForm("Edit", "Equipment", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+    @Html.HiddenFor(model => model.equipmentID)
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.equimentDescription, htmlAttributes: new { @class = "control-label" })
+        @Html.TextBoxFor(model => model.equimentDescription, new { @class = "form-control", placeholder = "Descripción del equipo" })
+        @Html.ValidationMessageFor(model => model.equimentDescription, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        <input type="submit" value="Guardar" class="btn btn-primary" />
+        @Html.ActionLink("Cancelar", "Index", null, new { @class = "btn btn-secondary" })
+    </div>
+}

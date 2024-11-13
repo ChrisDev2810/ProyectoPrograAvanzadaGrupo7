@@ -1,0 +1,60 @@
+﻿@model Workspaces_Meeting_Rooms.room
+
+@{
+    ViewBag.Title = "Editar Sala";
+}
+
+<h2>Editar Sala</h2>
+
+@using (Html.BeginForm("Edit", "Room", FormMethod.Post))
+{
+    @Html.HiddenFor(model => model.roomID) <!-- Campo oculto para el ID de la habitación -->
+
+    <div class="form-group">
+        <label for="name">Nombre</label>
+        @Html.TextBoxFor(model => model.name, new { @class = "form-control", placeholder = "Enter room name" })
+    </div>
+
+    <div class="form-group">
+        <label for="capacity">Capacidad</label>
+        @Html.TextBoxFor(model => model.capacity, new { @class = "form-control", placeholder = "Enter capacity" })
+    </div>
+
+    <div class="form-group">
+        <label for="location">Localización</label>
+        @Html.TextBoxFor(model => model.location, new { @class = "form-control", placeholder = "Enter location" })
+    </div>
+
+    <div class="form-group">
+        <label for="availability_start">Hora de inicio</label>
+        @Html.TextBoxFor(model => model.availability_start, "{0:hh\\:mm}", new { @class = "form-control", placeholder = "HH:mm", type = "time" })
+    </div>
+
+    <div class="form-group">
+        <label for="availability_end">Hora limite finalización</label>
+        @Html.TextBoxFor(model => model.availability_end, "{0:hh\\:mm}", new { @class = "form-control", placeholder = "HH:mm", type = "time" })
+    </div>
+
+    <div class="form-group">
+        <label for="isActive">Disponible</label>
+        @Html.CheckBoxFor(model => model.isActive)
+    </div>
+
+    <div class="form-group">
+        <label>Equipos Disponibles</label>
+        <div>
+            @foreach (var equipment in (IEnumerable<SelectListItem>)ViewBag.Equipments)
+            {
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" name="selectedEquipments" value="@equipment.Value" @(equipment.Selected ? "checked" : "") />
+                        @equipment.Text
+                    </label>
+                </div>
+            }
+        </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Guardar</button>
+    @Html.ActionLink("Cancelar", "Index", "Room", null, new { @class = "btn btn-secondary" })
+}
