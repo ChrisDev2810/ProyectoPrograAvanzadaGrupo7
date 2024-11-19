@@ -1,0 +1,60 @@
+﻿@model IEnumerable<Workspaces_Meeting_Rooms.reservation>
+
+@{
+    ViewBag.Title = "Lista de Reservaciones";
+}
+
+<h2>Lista de Reservaciones</h2>
+
+<!-- Filtros -->
+@using (Html.BeginForm("Index", "Reservation", FormMethod.Get))
+{
+    <div class="form-group">
+        <label for="startDate">Fecha de Inicio</label>
+        @Html.TextBox("startDate", Request["startDate"], new { @class = "form-control", type = "date" })
+    </div>
+
+    <div class="form-group">
+        <label for="roomId">Sala</label>
+        @Html.DropDownList("roomId", (IEnumerable<SelectListItem>)ViewBag.Rooms, "Seleccione una Sala", new { @class = "form-control" })
+    </div>
+
+    <div class="form-group">
+        <label for="userId">Usuario</label>
+        @Html.DropDownList("userId", (IEnumerable<SelectListItem>)ViewBag.Users, "Seleccione un Usuario", new { @class = "form-control" })
+    </div>
+    <br />
+    <button type="submit" class="btn btn-primary">Filtrar</button>
+}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>ReservaciónID</th>
+            <th>RoomID</th>
+            <th>UserID</th>
+            <th>Hora de Inicio</th>
+            <th>Hora de Finalización</th>
+            <th>Estado</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var reservation in Model)
+        {
+            <tr>
+                <td>@reservation.reservationID</td>
+                <td>@reservation.roomId</td>
+                <td>@reservation.userID</td>
+                <td>@reservation.startTime</td>
+                <td>@reservation.endTime</td>
+                <td>@reservation.statusID</td>
+                <td>
+                    @Html.ActionLink("Editar", "Edit", new { id = reservation.reservationID }) |
+                    @Html.ActionLink("Eliminar", "Delete", new { id = reservation.reservationID })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@Html.ActionLink("Volver al Home", "Index", "Home", new { }, new { @class = "btn btn-primary" })
