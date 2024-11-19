@@ -1,0 +1,59 @@
+﻿@model Workspaces_Meeting_Rooms.reservation
+
+@{
+    ViewBag.Title = "Eliminar Reserva";
+}
+
+<h2>Eliminar Reserva</h2>
+
+<div>
+    <h4>Detalles de la Reserva</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.reservationID)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.reservationID)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.roomId)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.roomId)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.userID)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.userID)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.startTime)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.startTime)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.endTime)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.endTime)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.statusID)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.statusID)
+        </dd>
+    </dl>
+</div>
+
+@using (Html.BeginForm("Delete", "Reservation", FormMethod.Post))
+{
+    @Html.HiddenFor(model => model.reservationID)
+    <div class="form-group">
+        <input type="submit" value="Eliminar" class="btn btn-danger" onclick="return confirm('¿Está seguro de que desea eliminar esta reserva?');" />
+        @Html.ActionLink("Cancelar", "Index", null, new { @class = "btn btn-secondary" })
+    </div>
+}
