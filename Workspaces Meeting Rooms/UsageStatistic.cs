@@ -18,8 +18,9 @@ namespace Workspaces_Meeting_Rooms
         public int roomID { get; set; }
         public System.DateTime date { get; set; }
         public decimal hoursBooked { get; set; }
-        public decimal porcentageUsed { get; set; }
+        public int reservationID { get; set; }
     
         public virtual room room { get; set; }
+        public virtual reservation reservation { get; set; }
     }
 }

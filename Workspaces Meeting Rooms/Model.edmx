@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="WMRDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="WMRDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="equipment">
           <Key>
             <PropertyRef Name="equipmentID" />
@@ -58,7 +58,7 @@
           <Property Name="roomID" Type="int" Nullable="false" />
           <Property Name="date" Type="date" Nullable="false" />
           <Property Name="hoursBooked" Type="decimal" Precision="5" Scale="2" Nullable="false" />
-          <Property Name="porcentageUsed" Type="decimal" Precision="5" Scale="2" Nullable="false" />
+          <Property Name="reservationID" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="users">
           <Key>
@@ -129,15 +129,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__UsageStat__roomI__6A30C649">
-          <End Role="room" Type="Self.room" Multiplicity="1" />
+        <Association Name="FK__UsageStat__reser__6FE99F9F">
+          <End Role="reservation" Type="Self.reservation" Multiplicity="1" />
           <End Role="UsageStatistic" Type="Self.UsageStatistic" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="room">
-              <PropertyRef Name="roomID" />
+            <Principal Role="reservation">
+              <PropertyRef Name="reservationID" />
             </Principal>
             <Dependent Role="UsageStatistic">
-              <PropertyRef Name="roomID" />
+              <PropertyRef Name="reservationID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -169,13 +169,12 @@
             <End Role="room" EntitySet="room" />
             <End Role="roomsEquipment" EntitySet="roomsEquipment" />
           </AssociationSet>
-          <AssociationSet Name="FK__UsageStat__roomI__6A30C649" Association="Self.FK__UsageStat__roomI__6A30C649">
-            <End Role="room" EntitySet="room" />
+          <AssociationSet Name="FK__UsageStat__reser__6FE99F9F" Association="Self.FK__UsageStat__reser__6FE99F9F">
+            <End Role="reservation" EntitySet="reservation" />
             <End Role="UsageStatistic" EntitySet="UsageStatistic" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="WMRDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -200,6 +199,7 @@
           <NavigationProperty Name="room" Relationship="Self.FK__reservati__roomI__6B24EA82" FromRole="reservation" ToRole="room" />
           <NavigationProperty Name="status" Relationship="Self.FK__reservati__statu__6D0D32F4" FromRole="reservation" ToRole="status" />
           <NavigationProperty Name="user" Relationship="Self.FK__reservati__userI__6C190EBB" FromRole="reservation" ToRole="users" />
+          <NavigationProperty Name="UsageStatistics" Relationship="WMRDBModel.FK__UsageStat__reser__6FE99F9F" FromRole="reservation" ToRole="UsageStatistic" />
         </EntityType>
         <EntityType Name="room">
           <Key>
@@ -242,8 +242,9 @@
           <Property Name="roomID" Type="Int32" Nullable="false" />
           <Property Name="date" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="hoursBooked" Type="Decimal" Precision="5" Scale="2" Nullable="false" />
-          <Property Name="porcentageUsed" Type="Decimal" Precision="5" Scale="2" Nullable="false" />
           <NavigationProperty Name="room" Relationship="Self.FK__UsageStat__roomI__6A30C649" FromRole="UsageStatistic" ToRole="room" />
+          <Property Name="reservationID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="reservation" Relationship="WMRDBModel.FK__UsageStat__reser__6FE99F9F" FromRole="UsageStatistic" ToRole="reservation" />
         </EntityType>
         <EntityType Name="user">
           <Key>
@@ -359,7 +360,23 @@
             <End Role="room" EntitySet="rooms" />
             <End Role="UsageStatistic" EntitySet="UsageStatistics" />
           </AssociationSet>
+          <AssociationSet Name="FK__UsageStat__reser__6FE99F9F" Association="WMRDBModel.FK__UsageStat__reser__6FE99F9F">
+            <End Role="reservation" EntitySet="reservations" />
+            <End Role="UsageStatistic" EntitySet="UsageStatistics" />
+          </AssociationSet>
         </EntityContainer>
+        <Association Name="FK__UsageStat__reser__6FE99F9F">
+          <End Type="WMRDBModel.reservation" Role="reservation" Multiplicity="1" />
+          <End Type="WMRDBModel.UsageStatistic" Role="UsageStatistic" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="reservation">
+              <PropertyRef Name="reservationID" />
+            </Principal>
+            <Dependent Role="UsageStatistic">
+              <PropertyRef Name="reservationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -419,11 +436,11 @@
           <EntitySetMapping Name="UsageStatistics">
             <EntityTypeMapping TypeName="WMRDBModel.UsageStatistic">
               <MappingFragment StoreEntitySet="UsageStatistic">
+                <ScalarProperty Name="reservationID" ColumnName="reservationID" />
                 <ScalarProperty Name="statsID" ColumnName="statsID" />
                 <ScalarProperty Name="roomID" ColumnName="roomID" />
                 <ScalarProperty Name="date" ColumnName="date" />
                 <ScalarProperty Name="hoursBooked" ColumnName="hoursBooked" />
-                <ScalarProperty Name="porcentageUsed" ColumnName="porcentageUsed" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

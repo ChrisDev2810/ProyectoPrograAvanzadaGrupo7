@@ -1,0 +1,36 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Metricas</h2>
+
+<div class="container">
+    <div class="row d-flex justify-content-around">
+        <nav class="col-auto">
+            <button id="barGraphicOption" class="btn btn-primary">Grafico de Porcentaje de Ocupación Por Sala</button>
+            <button id="doughnutGraphicOption" class="btn btn-primary">Grafico de Cantidad de Horas Mas Demandadas Por Sala</button>
+        </nav>
+    </div>
+</div>
+
+<main id="canvasContent">
+    <div style="display: none" id="canvasBarContent">
+
+    </div>
+    <div style="display: none" id="canvasDoughnutContent">
+
+    </div>
+</main>
+
+<div class="col-auto">
+    @Html.ActionLink("Volver al Inicio", "Index", "Home", new { }, new { @class = "btn btn-primary" })
+</div>
+
+
+
+@section Scripts
+    {
+    <script src="~/Scripts/graphics.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+}

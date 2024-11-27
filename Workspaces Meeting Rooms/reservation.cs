@@ -14,6 +14,12 @@ namespace Workspaces_Meeting_Rooms
     
     public partial class reservation
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public reservation()
+        {
+            this.UsageStatistics = new HashSet<UsageStatistic>();
+        }
+    
         public int reservationID { get; set; }
         public int roomId { get; set; }
         public int userID { get; set; }
@@ -24,5 +30,7 @@ namespace Workspaces_Meeting_Rooms
         public virtual room room { get; set; }
         public virtual status status { get; set; }
         public virtual user user { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<UsageStatistic> UsageStatistics { get; set; }
     }
 }
