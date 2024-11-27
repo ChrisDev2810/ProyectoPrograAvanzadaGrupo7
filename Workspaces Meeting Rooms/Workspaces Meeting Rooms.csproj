@@ -172,7 +172,7 @@
     <Compile Include="UsageStatistic.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
-    <Compile Include="users.cs">
+    <Compile Include="user.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
   </ItemGroup>
