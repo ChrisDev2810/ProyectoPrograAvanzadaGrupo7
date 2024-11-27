@@ -257,6 +257,7 @@
     <Content Include="Views\Reservation\Index.cshtml" />
     <Content Include="Views\Reservation\Edit.cshtml" />
     <Content Include="Views\Reservation\Delete.cshtml" />
+    <Content Include="Views\Metrics\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
