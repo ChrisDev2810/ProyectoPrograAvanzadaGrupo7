@@ -1,0 +1,133 @@
+﻿
+@{
+    ViewBag.Title = "Edit";
+}
+
+﻿@model Workspaces_Meeting_Rooms.reservation
+
+@{
+    ViewBag.Title = "Editar Reserva";
+}
+
+<h2>Editar Reserva</h2>
+
+@using (Html.BeginForm("Edit", "Reservation", FormMethod.Post))
+{
+    @Html.HiddenFor(model => model.reservationID)
+
+    <div class="form-group">
+        <label for="roomId">Sala</label>
+        <div>
+            @foreach (var room in (IEnumerable<SelectListItem>)ViewBag.Rooms)
+            {
+                <label>
+                    <input type="radio" name="selectedRoom" value="@room.Value" @(room.Value == Model.roomId.ToString() ? "checked" : "") />
+                    @room.Text
+                </label>
+            }
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="userID">Email de usuario registrador</label>
+        @Html.DropDownListFor(model => model.userID, (SelectList)ViewBag.Users, "Select a User", new { @class = "form-control", disabled = "disabled" })
+        @Html.ValidationMessageFor(model => model.userID)
+    </div>
+
+    <div class="form-group">
+        <label for="startTime">Hora de Inicio</label>
+        @Html.TextBoxFor(model => model.startTime, "{0:yyyy-MM-ddTHH:mm}", new { @class = "form-control", type = "datetime-local", id = "startTime" })
+        @Html.ValidationMessageFor(model => model.startTime)
+    </div>
+
+    <div class="form-group">
+        <label for="endTime">Hora de Finalización</label>
+        @Html.TextBoxFor(model => model.endTime, "{0:yyyy-MM-ddTHH:mm}", new { @class = "form-control", type = "datetime-local", id = "endTime" })
+        @Html.ValidationMessageFor(model => model.endTime)
+    </div>
+
+    <div class="form-group">
+        <label for="statusID">Estado</label>
+        <div>
+            @foreach (var status in (IEnumerable<SelectListItem>)ViewBag.Statuses)
+            {
+                <label>
+                    <input type="radio" name="selectedStatus" value="@status.Value" @(status.Selected ? "checked" : "") />
+                    @status.Text
+                </label>
+            }
+        </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Guardar</button>
+    @Html.ActionLink("Cancelar", "Index", "Reservation", null, new { @class = "btn btn-secondary" })
+}
+
+@section Scripts
+{
+    <script>
+        /*** Redondear a la media hora mas cercana ****/
+        document.addEventListener("DOMContentLoaded", function () {
+            const startTimeInput = document.getElementById("startTime");
+            const endTimeInput = document.getElementById("endTime");
+
+            const roomAvailabilityStart = new Date('@ViewBag.RoomAvailabilityStart');
+            const roomAvailabilityEnd = new Date('@ViewBag.RoomAvailabilityEnd');
+
+            function roundToNearestHalfHour(date) {
+                const minutes = date.getMinutes();
+                const roundedMinutes = minutes >= 30 ? 30 : 0;
+                date.setMinutes(roundedMinutes);
+                date.setSeconds(0);
+                date.setMilliseconds(0);
+                return date;
+            }
+
+            function modifyInputMinutesRanges(dateTimeInput) {
+                dateTimeInput.addEventListener("input", () => {
+                    let date = new Date(dateTimeInput.value);
+                    if (!isNaN(date.getTime())) {
+                        date = roundToNearestHalfHour(date);
+                        const year = date.getFullYear();
+                        const month = String(date.getMonth() + 1).padStart(2, '0');
+                        const day = String(date.getDate()).padStart(2, '0');
+                        const hours = String(date.getHours()).padStart(2, '0');
+                        const mins = String(date.getMinutes()).padStart(2, '0');
+                        dateTimeInput.value = `${year}-${month}-${day}T${hours}:${mins}`;
+                    }
+                });
+            }
+            /**** Validación de tiempos disponibles ****/
+            function validateTimes() {
+                const selectedStartTime = new Date(startTimeInput.value).getTime();
+                const selectedEndTime = new Date(endTimeInput.value).getTime();
+
+                // Verificar si la hora de inicio está dentro de los límites
+                if (selectedStartTime < roomAvailabilityStart.getTime() || selectedStartTime >= roomAvailabilityEnd.getTime()) {
+                    alert("La hora de inicio está fuera del rango de disponibilidad de la sala.");
+                    startTimeInput.value = "";
+                    return false;
+                }
+
+                // Verificar si la hora de finalización está dentro de los límites
+                if (selectedEndTime > roomAvailabilityEnd.getTime() || selectedEndTime <= roomAvailabilityStart.getTime()) {
+                    alert("La hora de finalización está fuera del rango de disponibilidad de la sala.");
+                    endTimeInput.value = "";
+                    return false;
+                }
+
+                return true;
+            }
+
+            if (startTimeInput) {
+                modifyInputMinutesRanges(startTimeInput);
+                startTimeInput.addEventListener('change', validateTimes);
+            }
+
+            if (endTimeInput) {
+                modifyInputMinutesRanges(endTimeInput);
+                endTimeInput.addEventListener('change', validateTimes);
+            }
+        });
+    </script>
+}

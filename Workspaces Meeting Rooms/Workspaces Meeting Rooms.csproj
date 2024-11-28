@@ -259,10 +259,12 @@
     <Content Include="Views\Equipment\Edit.cshtml" />
     <Content Include="Views\Equipment\Delete.cshtml" />
     <Content Include="Views\Metrics\Index.cshtml" />
+    <Content Include="Views\Reservation\Delete.cshtml" />
+    <Content Include="Views\Reservation\Edit.cshtml" />
+    <Content Include="Views\Reservation\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Reservation\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.rtl.min.css.map" />
