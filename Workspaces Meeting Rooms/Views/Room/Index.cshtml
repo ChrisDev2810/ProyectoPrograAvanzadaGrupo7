@@ -7,7 +7,7 @@
 <h2>Lista de Salas</h2>
 
 <p>
-    @Html.ActionLink("Crear una nueva sala", "Create")
+    @Html.ActionLink("Crear una nueva sala", "Create", new { }, new { @class = "btn btn-primary" })
 </p>
 
 <table class="table">
@@ -36,9 +36,9 @@
                 <td>@(room.isActive == true ? "Disponible" : (room.isActive == false ? "Ocupado" : "Estado desconocido"))</td>
 
                 <td>
-                    @Html.ActionLink("Detalles", "Details", new { id = room.roomID }) |
-                    @Html.ActionLink("Editar", "Edit", new { id = room.roomID }) |
-                    @Html.ActionLink("Eliminar", "Delete", new { id = room.roomID })
+                    @Html.ActionLink("Detalles", "Details", new { id = room.roomID }, new { @class = "btn btn-secondary" }) |
+                    @Html.ActionLink("Editar", "Edit", new { id = room.roomID }, new { @class = "btn btn-warning" }) |
+                    @Html.ActionLink("Eliminar", "Delete", new { id = room.roomID }, new { @class = "btn btn-danger" })
                 </td>
             </tr>
         }

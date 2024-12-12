@@ -49,12 +49,12 @@
                 <td>@reservation.endTime</td>
                 <td>@reservation.statusID</td>
                 <td>
-                    @Html.ActionLink("Editar", "Edit", new { id = reservation.reservationID }) |
-                    @Html.ActionLink("Eliminar", "Delete", new { id = reservation.reservationID })
+                    @Html.ActionLink("Editar", "Edit", new { id = reservation.reservationID }, new { @class = "btn btn-warning" }) |
+                    @Html.ActionLink("Eliminar", "Delete", new { id = reservation.reservationID }, new { @class = "btn btn-danger" })
                 </td>
             </tr>
         }
     </tbody>
 </table>
 
-@Html.ActionLink("Volver al Home", "Index", "Home", new { }, new { @class = "btn btn-primary" })
+@Html.ActionLink("Volver al Inicio", "Index", "Home", new { }, new { @class = "btn btn-primary" })
